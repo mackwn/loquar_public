@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @question.category %>
+</p>
+
+<%= render @question %>
+  <%= render 'answers/submit_form' %>
+  <% @question.answers.all.each do |answer| %>
+    <%= answer.content %> <br>
+  <% end %>

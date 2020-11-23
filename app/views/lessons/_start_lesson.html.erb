@@ -1,0 +1,56 @@
+<div class="panel panel-default panel-loquar">
+<div class="panel-heading text-center panel-loquar-heading">
+     Let's begin <%= @lesson.name %>!
+</div>
+
+
+<div class="panel-body">
+    <div row>
+    <div class = "col-xs-12 col-lg-6 text-center">
+        <br>
+        <% if @lesson.id == current_user.level %>
+        <p class ="strong">
+        Let's begin level <%= @lesson.id %>! Ancient languages are a time machine - 
+        take the next step towards building yours. </p>
+        <% else %>
+        <p class ="strong">You have already completed level <%= @lesson.id %>.
+        Every lesson contains review questions from previous lessons, so you only need
+        to review if you want extra practice on a specific topic. </p>
+        
+        <% end %>
+       <div class = "row">
+                <div class = "col-lg-6">
+                    <%= form_for(:new_less, url: start_lesson_path) do |f| %>
+                      <%= f.hidden_field :lesson_id, value: @lesson.id %>
+                      <%= f.submit "Incipiamus", :class => "btn btn-default btn-md loquar-dark-button", :role => "button" %>
+                    <% end %>
+                </div>
+                <div class = "col-lg-6">
+                    <%= link_to "Course Index", lessons_path, :class => "btn btn-default btn-md loquar-light-button", :role => "button"%>
+                </div>
+            </div>
+        </div>
+    <div class = "col-xs-12 col-lg-6">
+        <div class = "well well-loquar">
+        Remember to take the time to read the lesson text before working the 
+        interactive exercises. See the <%= link_to 'about', root_path+'#about' %> page for information on additional
+        Latin learning resources and how to obtain the original text in pdf form.
+        </div>
+        
+    </div>
+    </div>
+    <div class = "row row-centered">
+
+    <div class = "col-xs-12 col-md-5 col-md-offset-1 text-center col-center">
+        
+    </div>
+    <div class = "col-xs-12 col-md-5 text-center col-center">
+        
+    </div>
+
+    </div>
+</div>
+
+</div>
+
+

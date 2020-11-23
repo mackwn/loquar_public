@@ -1,0 +1,10 @@
+$('#question-container').empty()
+<% if @q_state == "finished" and @course_comp == true %>
+$('#question-container').html('<%= escape_javascript render 'answering/completed_course' %>');
+<% elsif @q_state == "finished"%>
+$('#question-container').html('<%= escape_javascript render 'answering/completed_lesson' %>');
+<% elsif @q_state == "failed" %>
+$('#question-container').html('<%= escape_javascript render 'answering/failed_lesson' %>');
+<% else %>
+
+<% end %>

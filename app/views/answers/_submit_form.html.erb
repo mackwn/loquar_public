@@ -1,0 +1,90 @@
+
+
+<%= form_for(:submission, url: submit_path, remote: true) do |f| %>
+<!-- QUESTION DISPLAY ROW -->
+<div class = "row">
+        <%= f.hidden_field :question_id, value: @question.id %>
+        <%= f.hidden_field :answer_id, value: session[:answer_id] %>
+        <!-- LEFT COLUMN -->
+        <div class = "col-xs-6">
+    
+        <div class="well text-center">
+            <% case session[:answers_type] %>
+            <% when "type_blanks" %>
+                <%= f.hidden_field :submission, value: session[:answers_choices][0], :id => "answer_submit" %>
+                <p class = "question-display" id="answer_disp"><%= session[:answers_choices][0].html_safe %></p><br>
+            <% when "select_blanks" %>
+                <%= f.hidden_field :submission, value: session[:answers_choices][0], :id => "answer_submit" %>
+                <p class = "question-display" id="answer_disp"><%= session[:answers_choices][0].html_safe %></p><br>
+            <% when "mult_choice" %>
+                <p class = "question-display", id="answer_disp">
+                    <%= @question.content %>
+                </p>
+            <% end %>
+
+        </div>
+        </div>
+        <!-- RIGHT COLUMN -->
+        <div class = "col-xs-6">
+
+        <div class="well text-center">
+            <% case session[:answers_type] %>
+            <% when "mult_choice" %>
+                <%= link_to "Audi", "javascript:void(0)", :class => "btn btn-primary btn-sm", :role => "button",:id => "play-question" %> 
+            <% else %>
+                <p class = "question-display">
+                    <%= @question.content %>
+                    <% if session[:answers_type] == "select_blanks" %>
+                        <%= link_to "Audi", "javascript:void(0)", :class => "btn btn-primary btn-sm", :role => "button",:id => "play-question" %>
+                    <% end %>
+                </p>
+            <% end %>
+
+        </div>
+        </div>
+</div>  
+<!-- ANSWER CHOICE DISPLAY ROW -->
+<div class = "row">
+        <!-- ANSWER CHOICE PANEL -->
+
+            <div class="col-xs-7">
+                <% case session[:answers_type] %>
+                <% when "mult_choice" %>
+                    <div class="btn-group-vertical">
+                        <% session[:answers_choices].each do |ans| %>
+                            <label class="btn btn-primary mult-choice">
+                            <%= f.radio_button(:submission, "#{ans}", :class => "form-check-input", :'data-toggle' => "button") %>
+                            <%= "#{ans}" %>
+                            </label>
+                        <% end %>
+                    </div>
+                <% when "type_blanks" %>
+                    <div class = "row">
+                        <% session[:answers_choices][1].times do |j| %>
+                            <div class = "col-xs-6">
+                            <%= f.text_field :words,:class => "type_blanks form-control",:name => "word#{j}",:autocomplete => "off" %>
+                            blank<%= j %>
+                            </div>
+                        <% end %>
+                    </div>
+                <% when "select_blanks" %>
+                    <div class = "row">
+                        <% session[:answers_choices][1].times do |j| %>
+                            <div class = "col-xs-6">
+                            <%= f.select :words, session[:answers_choices][2][j], {include_blank: true}, :class => "form-control form-control-lg", :name => "word#{j}" %>
+                            blank<%= j %>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+            <!-- SUBMIT BUTTONS -->
+            <div class = "col-xs-5" id = "submit-loc">
+                <%= f.submit "Submit Answer", :class => "btn btn-primary btn-lg", :role => "button", :id => "submit-button"  %>
+            </div>
+    </div>
+    <% end %>
+
+
+
+    

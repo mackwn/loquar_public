@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Loquar - Latin Web App</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Kreon:300,400|Raleway:200,600,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- OG tags for facebook share -->
+    <meta property="og:url"           content="www.loquarlatin.com/" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Loquar - A webapp for Latin" />
+    <meta property="og:description"   content="A web app for learning Latin, the language of the ancient Romans." />
+    <meta property="og:image"         content="www.loquarlatin.com/assets/sobreminerva3-7f3d33fa0a19732d0c633d528f94e645dfa3b20827e7446f2fa3280780608106.jpg" />
+  </head>
+
+  <body>
+  <div id="fb-root"></div>
+    <!-- script for facebook share -->
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <%= render 'layouts/header' %>
+    
+    <%= yield %>
+    
+   <% #render 'layouts/footer' %>
+
+
+  </body>
+</html>

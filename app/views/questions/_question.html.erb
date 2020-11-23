@@ -1,0 +1,145 @@
+<div class="panel panel-default panel-loquar" id = "lesson-header">
+  <!-- HEADER -->
+  <div class = "panel-heading text-center panel-loquar-heading">
+     <%= @lesson.name %>
+  </div>
+
+<!-- BODY -->
+
+    <div class = "panel-body panel-loquar-body">
+      <div class = "row">
+        <div class = "col-xs-12">
+          <div id = "lesson-stats-panel">
+          <div class = "row">
+          <div class = "col-xs-4">Lives:<br> <span id = "lives-display">
+              <% if current_user.level == session[:lesson_id] %>
+              <%= session[:lesson_lives] %>
+              <% else %>
+              -
+              <% end %>
+              </span> 
+              <span class="glyphicon glyphicon-heart"></span> </div>
+          <div class = "col-xs-4">Score:<br>  <span id = "points-display">
+            <% if current_user.level == session[:lesson_id] %>
+            <%= session[:score] %>
+            <% else %>
+            (review)
+            <% end %>
+            </span> </div>
+          <div class = "col-xs-4"> Next Level:<br> 
+
+          <%= points_to_pass(session[:lesson_id]).round %> 
+
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class ="row">
+        <div class = "col-xs-12">
+            <div class="progress loquar-progress">
+              <% lesson_progress = ((session[:lesson_index].to_f/session[:lesson_content].count.to_f)*100).to_i+7 %>
+              <% #lesson_progress = 7 if lesson_progress < 5 %>
+            <div class="progress-bar" id="lesson-progress" role="progressbar" style="width: <%= lesson_progress %>%" aria-valuenow="<%= lesson_progress %>" aria-valuemin="0" aria-valuemax="107">
+                <%= session[:lesson_index] %>/<%= session[:lesson_content].count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class = "row">
+        <div class = "col-xs-12 text-left">
+            <span class = "lesson-instructions">
+            <% case @question.category %>
+              <% when "translation-lat" %>
+                Select the appropriate English words to complete the translation:
+              <% when "vocab" %>
+                Select the appropriate definition for the given vocabulary item:
+              <% when "translation-eng" %>
+                Type in the appropriate Latin words to complete the translation:
+              <% end %>
+            </span>
+            
+        </div>
+      </div>
+            <% case session[:answers_type] %>
+            <% when "type_blanks" %>
+                <%= render 'answers/form_type_blank' %>
+            <% when "select_blanks" %>
+                <%= render 'answers/form_select_blank' %>
+            <% when "mult_choice" %>
+                <%= render 'answers/form_mult_choice' %>
+                
+            <% end %>
+    
+      <div class = "row">
+        <div class = "col-xs-4 col-md-3" >
+          <%= form_for(:new_less, url: start_lesson_path) do |f| %>
+            <%= f.hidden_field :lesson_id, value: session[:lesson_id] %>
+          <%= f.submit "Restart lesson", :class => "btn btn-default btn-sm loquar-dark-button", :role => "button"  %>
+        <% end %>
+        </div>
+        <div class = "col-xs-4 col-md-3">
+          <%= link_to "Course Index", lessons_path, :class => "btn btn-default btn-sm loquar-light-button", :role => "button" %>
+        </div>
+        <div class = "col-xs-4 col-md-offset-3 col-md-3">
+          <%= link_to "Feedback?", "#", :class => "btn btn-default btn-sm loquar-feedback-button", :role => "button", :'data-toggle' => "modal", :'data-target' => "#myModal" %>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="panel-footer"></div> -->
+  
+
+</div>
+
+<% if current_user.is? :admin %>
+  <% @question.answers.all.each do |answer| %>
+        <%= answer.content %> <br>
+  <% end %>
+<% end %>
+<% if Pathname("#{Rails.public_path}/audios/#{@question.id}exsound.wav").exist? %>
+  <%= audio_tag("#{@question.id}exsound.wav",:id => "question-audio", skip_pipeline: true) %>
+<% end %>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">We appreciate your feedback.</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please fill out the form below if you have any problems with the questions, technical issues with the interface, or suggestions for improvement. </p>
+        <div class = "row">
+          <div class = "col-xs-6">
+            <%= render 'feedback_msgs/feedback_msg.html.erb',feedback_msg: @message %>
+          </div>
+          <div class = "col-xs-6">
+            <div id ="errormsgs">
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class ="row">
+          <div class = "col-xs-9 col-md-10">
+            <div class ="text-left" id = "thanksmsg">
+              
+            </div>
+          </div>
+          <div class = "col-xs-3 col-md-2">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+          </div>
+        </div>
+      </div>
+          
+    </div>
+        
+  </div>
+</div>
+
+

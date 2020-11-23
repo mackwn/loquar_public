@@ -1,0 +1,76 @@
+
+<div class="panel panel-default panel-loquar">
+<div class="panel-heading panel-loquar-heading text-center">
+     <%= @lesson.name %> Completed!
+</div>
+
+
+
+<div class="panel-body panel-loquar-body">
+    <div class = "row">
+        <div class = "col-xs-12 col-sm-6 col-md-5">
+        <div class = "well well-loquar">
+            Remaining lives: 
+            <% if session[:lesson_lives] == nil %>
+            - 
+            <% else %>
+            <%= session[:lesson_lives] %> 
+            <% end %>
+            <span class="glyphicon glyphicon-heart"></span>
+            <br>
+            Points: 
+            <%= current_user.points.round(1) %> <br>
+            Next level:
+            <% if session[:lesson_lives] == nil %>
+            (review)
+            <% else %>
+            <%= @next_les_points.round(1) %>
+            <% end %>
+
+        </div>
+        
+        </div>
+    <div class = "col-xs-12 col-sm-6 col-md-7">
+    <% if @lesson.id == (current_user.level-1) and session[:lesson_lives] != nil %>
+    You have passed level <%= @lesson.id %> and unlocked the next level. Trismegistus!<br>
+        You have arrived one step closer 
+        to transcending time through language. Maintain the effort. <br>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just finished level <%= @lesson.id %> on Loquar, a web app for learning Latin, the langauge of ancient Rome." data-url="http://loquar.herokuapp.com/" data-hashtags="learnlatin" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+       
+    <% elsif @lesson.id == current_user.level %>
+        You have finished level <%= @lesson.id %>! Maintain the effort. <br>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just finished level <%= @lesson.id %> on Loquar, a web app for learning Latin, the langauge of ancient Rome." data-url="http://loquar.herokuapp.com/" data-hashtags="learnlatin" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <br>
+        You require additional points to unlock the next level's exercises. 
+        Continue reviewing this lesson to earn enough points to unlock the next level.
+        
+    <% else %>
+    You have completed reviewing level <%= @lesson.id %>. Review your current level to 
+    earn points and unlock additional lessons. Maintain the effort.<br>
+     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just finished level <%= @lesson.id %> on Loquar, a web app for learning Latin, the langauge of ancient Rome." data-url="http://loquar.herokuapp.com/" data-hashtags="learnlatin" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <% end %>
+    
+    </div>
+    
+    </div>
+    <hr class = "home-hr">
+    <div class = "row">
+    <div class = "col-xs-12 col-md-4 text-align">
+        <% if current_user.points < @next_les_points %>
+         <%= link_to "Next Lesson", lesson_path(@next_les), :class => "btn btn-default btn-md loquar-dark-button disabled", :role => "button"%>
+        <% else %>
+         <%= link_to "Next Lesson", lesson_path(@next_les), :class => "btn btn-default btn-md loquar-dark-button", :role => "button"%>
+        <% end %>
+    </div>
+    <div class = "col-xs-12  col-md-4 text-align">
+       <%= link_to "Course Index", lessons_path, :class => "btn btn-default btn-md loquar-light-button", :role => "button"%>
+    </div>
+    <div class = "col-xs-12 col-md-4 text-align">
+        <%= form_for(:new_less, url: start_lesson_path) do |f| %>
+          <%= f.hidden_field :lesson_id, value: @lesson.id %>
+          <%= f.submit "Restart lesson", :class => "btn btn-default btn-md loquar-dark-button", :role => "button"  %>
+        <% end %>
+    </div>
+</div>
+</div>
+

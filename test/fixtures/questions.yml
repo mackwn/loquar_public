@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
+one:
+  id: 1
+  category: vocab
+  content: puella
+  lesson_id: 1
+
+two:
+  category: vocab
+  content: puer
+  lesson_id: 1

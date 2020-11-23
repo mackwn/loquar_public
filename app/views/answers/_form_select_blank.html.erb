@@ -1,0 +1,117 @@
+<%= form_for(:submission, url: submit_path, remote: true) do |f| %>
+    <%= f.hidden_field :question_id, value: @question.id %>
+    <%= f.hidden_field :answer_id, value: session[:answer_id] %>
+    <%= f.hidden_field :submission, value: session[:answers_choices][0], :id => "answer_submit" %>
+<!-- QUESTION DISPLAY ROW -->
+<div class = "row">
+        
+    <!-- LEFT COLUMN -->
+    <div class = "col-xs-12 col-md-6">
+    <div class = "select-content text-center">
+
+        <span class = "question-display">
+                <%= @question.content %>
+                <%= link_to "javascript:void(0)", :class => "btn btn-primary btn-xs play-button", :role => "button",:id => "play-question" do %>
+                <span class="glyphicon glyphicon-volume-up"></span>
+                <% end %>
+        </span>
+
+    </div>
+    </div>
+    <!-- RIGHT COLUMN -->
+    <div class = "col-xs-12 col-md-6">
+    <div class = "select-input text-center">
+        <span class = "question-display" id="answer-disp-select-blank">
+            <%= session[:answers_choices][0].html_safe %>
+        </span>
+    </div>
+    </div>
+</div>  
+<br>
+<!-- ANSWER CHOICE DISPLAY ROW -->
+<div class = "row row-centered">
+    <!-- ANSWER CHOICE PANEL -->
+
+    <% session[:answers_choices][1].times do |j| %>
+        
+        <% if j == 0 %>
+        <div class = "select-bank" id = "<%= "select-bank-#{j}" %>"> 
+        <% else %>
+        <div class = "select-bank select-bank-hide" id = "<%= "select-bank-#{j}" %>"> 
+        <% end %>
+            <% session[:answers_choices][2][j].each_with_index do |word,i| %>
+                <div class = "col-xs-4 mult-choice-col col-centered">
+                <div class = "select-choice" id = "<%= "#{j}-select-blank-#{i}" %>">
+                    <%= word %>
+                </div>
+                </div>
+            <% end %>
+        </div>
+        
+
+        
+    <% end %>
+
+</div>
+<br>
+<div class = "row">
+    
+    <!-- SUBMIT BUTTONS -->
+    <div class = "col-xs-12" id = "submit-loc">
+        <div class = "submit-area">
+            
+            
+        
+
+        <%= f.submit "Submit Answer", :class => "btn btn-primary btn-md", :role => "button", :id => "submit-button"  %>
+        
+        
+
+    </div>
+    </div>
+</div>
+<% end %>
+
+<div id="vocabModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">We appreciate your feedback.</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please fill out the form below if you have any problems with the questions, technical issues with the interface, or suggestions for improvement. </p>
+        <div class = "row">
+          <div class = "col-xs-6">
+
+          </div>
+          <div class = "col-xs-6">
+            <div id ="errormsgs">
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class ="row">
+          <div class = "col-xs-9 col-md-10">
+            <div class ="text-left" id = "thanksmsg">
+              
+            </div>
+          </div>
+          <div class = "col-xs-3 col-md-2">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+          </div>
+        </div>
+      </div>
+          
+    </div>
+        
+  </div>
+</div>
+
+
+    

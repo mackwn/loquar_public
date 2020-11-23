@@ -1,0 +1,88 @@
+
+
+<%= form_for(:submission, url: submit_path, remote: true) do |f| %>
+<!-- QUESTION DISPLAY ROW -->
+<div class = "row">
+        <%= f.hidden_field :question_id, value: @question.id %>
+        <%= f.hidden_field :answer_id, value: session[:answer_id] %>
+        <%= f.hidden_field :submission, value: "", :id => "answer_submit" %>
+        
+        <% if @question.image.file? %>
+        <div class = "col-xs-12 col-md-8 col-md-offset-2">
+    
+        <div class = "select-content text-center">
+
+                <p class = "question-display", id="answer_disp">
+                    
+                      <%= image_tag @question.image.url(:display), :class => "img-responsive" %>
+
+                    <%= @question.content %>
+
+                <%= link_to "javascript:void(0)", :class => "btn btn-primary btn-xs play-button", :role => "button",:id => "play-question" do %>
+                    <span class="glyphicon glyphicon-volume-up"></span>
+                <% end %>
+                </p>
+
+        </div>
+        </div>
+        <% else %>
+        <!-- LEFT COLUMN -->
+        <div class = "col-xs-12 col-md-6 col-md-offset-3">
+    
+        <div class = "select-content text-center">
+
+                <p class = "question-display", id="answer_disp">
+                    
+
+                    <%= @question.content %>
+
+                <%= link_to "javascript:void(0)", :class => "btn btn-primary btn-xs play-button", :role => "button",:id => "play-question" do %>
+                    <span class="glyphicon glyphicon-volume-up"></span>
+                <% end %>
+                </p>
+
+        </div>
+        </div>
+        <% end %>
+</div>  
+
+<div class="row row-centered">
+
+    <% session[:answers_choices].each do |ans| %>
+        <div class = "col-xs-4 mult-choice-col col-centered">
+        <div id = "div0" class = "mult-choice-option">
+            <%= "#{ans}" %>
+        </div>
+        </div>
+     
+
+
+    <% end %>
+</div>
+            
+        
+
+
+
+<!-- ANSWER CHOICE DISPLAY ROW -->
+<div class = "row">
+    
+    <!-- SUBMIT BUTTONS -->
+    <div class = "col-xs-12" id = "submit-loc">
+        <div class = "submit-area">
+            
+            
+        
+
+        <%= f.submit "Submit Answer", :class => "btn btn-primary btn-md", :role => "button", :id => "submit-button"  %>
+        
+        
+
+    </div>
+    </div>
+</div>
+    <% end %>
+
+
+
+    

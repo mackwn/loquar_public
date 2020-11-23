@@ -1,0 +1,55 @@
+
+<div class="panel panel-default panel-loquar">
+<div class="panel-heading panel-loquar-heading text-center">
+     <%= @lesson.name %> Incomplete
+</div>
+
+
+
+<div class="panel-body panel-loquar-body">
+    <div class = "row">
+        <div class = "col-xs-12 col-sm-6 col-md-5">
+        <div class = "well well-loquar">
+            
+            Points: <%= current_user.points.round(1) %> <br>
+            Points needed: <%= @les_points %> <br>
+            Next lesson: <%= @next_les_points %>
+
+        </div>
+        </div>
+    <div class = "col-xs-12 col-sm-6 col-md-7">
+  
+        You have failed to complete the lesson without losing all your lives.
+        <% if @can_continue %>
+        <br><br> You may continue with three additional lives at the cost of 
+        three questions' points. You may also restart the lesson at no cost. 
+        <% else %>
+        <br><br> You do not have enough points to purchase additional lives. Restart the 
+        lesson or review previous lessons to hone your skills and earn points. 
+        <% end %>
+
+    </div>
+    
+    </div>
+    <hr class = "home-hr">
+    <div class = "row row-centered">
+    <div class = "col-xs-12 col-md-4 text-align col-centered">
+        <% if @can_continue %>
+            <%= link_to "Continue: -#{@lost_points} points", find_question_path, :class => "btn btn-default btn-md loquar-light-button", :role => "button"%>
+        <% else %>
+            <%= link_to "Continue: -#{@lost_points} points", find_question_path, :class => "btn btn-default btn-md loquar-light-button disabled", :role => "button"%>
+        <% end %>
+    </div>
+    <div class = "col-xs-12  col-md-4 text-align col-centered">
+        <%= form_for(:new_less, url: start_lesson_path) do |f| %>
+          <%= f.hidden_field :lesson_id, value: @lesson.id %>
+          <%= f.submit "Restart lesson", :class => "btn btn-default btn-md loquar-dark-button", :role => "button"  %>
+        <% end %>
+
+    </div>
+    <div class = "col-xs-12  col-md-4 text-align col-centered">
+        <%= link_to "Course Index", lessons_path, :class => "btn btn-default btn-md loquar-light-button", :role => "button" %>
+    </div>
+</div>
+</div>
+

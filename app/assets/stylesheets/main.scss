@@ -1,0 +1,478 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+/* universal */
+* {
+margin: 0;
+padding: 0;
+}
+
+body {
+
+    background-color: #E8FFFD;
+
+
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+.full-screen {
+  position: relative; /* needed for footer positioning*/
+  height: 100vh;
+}
+.hide-scroll {
+  overflow: hidden;
+}
+.mygrid-wrapper-div {
+
+    overflow: auto;
+    height: 70vh;
+}
+/* centering bootstrap columns: http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-centered-columns */
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.row-centered {
+    text-align:center;
+}
+.loquar-container {
+  margin-top: 75px;
+}
+/* typography */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+h1.left {
+    text-align: left;
+    padding: 0px;
+}
+
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 0px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.5em;
+  
+}
+
+
+
+
+/* header */
+#home-nav-bar {
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+}
+.navbar-brand {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+}
+
+/* footer */
+.copyright { 
+    position: fixed;
+    min-height:20px; 
+    font-size: .9em;
+    bottom: 0;
+    background-color:#000000;
+    width: 100%;
+
+    
+}
+.copyright p { text-align:left; color:#b2b2b2; padding:10px 0; margin-bottom:0px;}
+
+/* miscellaneous */
+.loquar-dark-button {
+  margin: 2px;
+  font-weight: 600;
+  border: 2.2px solid #5A5B5B;
+  background-color: #8F8F8F;
+  color: #FFFFFF;
+  
+ 
+}
+.loquar-light-button {
+  margin: 2px;
+  font-weight: 600;
+  border: 2.2px solid #5A5B5B;
+  color: #5A5B5B;
+  background-color: #E4E4E4;
+}
+
+.loquar-feedback-button {
+  margin: 2px;
+  font-weight: 600;
+  border: 2.2px solid #5A5B5B;
+  color: #5A5B5B;
+  background-color: #BBF08E;
+}
+
+
+/* forms */
+
+
+/* static pages */
+#home-splash {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    height: 40%;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #000000;
+    background: rgba(210, 231, 255, 0.7);
+    text-align: center;
+}
+#home-bg {
+    
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    background-image: asset-url("sobreminerva3.jpg") ;
+    background-position: center;
+    background-size: cover;
+
+}
+#home-banner {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 3.5em;
+}
+.home-header {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 3.0em;
+  text-align: center;
+  padding: 20px;
+}
+.full-height-div {
+    position:relative;
+    height: 100%;
+    bottom: 0;
+}
+#home-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.home-panel {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  margin: 10px;
+  padding: 25px;
+}
+.home-hr {
+  border-width: 2px;
+  margin: 5px;
+  border-color: #000000;
+}
+
+/* Users index */
+/* Users */
+#user-profile-table {
+
+}
+#user-profile-table tr {
+  border: solid thin;
+  padding: 0.5rem 2rem;
+}
+#user-profile-table td {
+  padding: 0.5rem 2rem;
+  vertical-align: middle; 
+}
+#user-profile-table th {
+  border: solid thin;
+  vertical-align: middle; 
+  text-align: center;
+
+}
+ 
+
+/* lesson index */
+#lesson-index-heading {
+  margin: 0px;
+  border: 0.8px solid #5A5B5B;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 0.9em;
+
+}
+.lesson-table-block {
+  margin: 0px;
+  border-bottom: 0.8px solid #5A5B5B;
+  border-left: 0.8px solid #5A5B5B;
+  border-right: 0.8px solid #5A5B5B;
+}
+.lesson-index-col {
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 4px;
+  padding-left: 4px;
+
+  font-size: 1.1em;
+}
+.lesson-link {
+
+}
+/* lessons */
+#lesson-container {
+  margin-top: 75px;
+}
+#question-container {
+  height: 80%;
+  /*width: 100%;*/
+  border-radius: 10px;
+  /*background-color:#99e6ff;*/
+}
+.panel-loquar {
+  
+  border: 1.3px solid #5A5B5B;
+  background-color: #D2E7FF;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+.well-loquar {
+  background-color: #FDFFC5;
+  border: 1.3px solid #5A5B5B;
+}
+#lesson-text {
+  font-family: 'Kreon', serif;
+  font-weight: 300;
+}
+#lesson-text b {
+  font-weight: 400;
+}
+#lesson-text h5 {
+  font-weight: 400;
+  font-size: 1.35em;
+}
+#lesson-text table {
+  border-collapse: collapse;
+}
+#lesson-text td, th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: left;
+}
+.panel-default > .panel-loquar-heading {
+  color: #E9E9E9;
+  background-color: #86BEFF;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 2.0em;
+}
+.lesson-instructions {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+.quote-well {
+  font-size: 0.8em;
+  text-align: center;
+}
+.quote-hr {
+  border-width: 0.7px;
+  margin: 10px;
+  border-color: #000000;
+}
+/* questions */
+.question-display {
+  margin: 15px;
+}
+#lesson-stats-panel {
+  font-size: 1.0em;
+  /*background-color: #FDFFC5;*/
+  text-align: center;
+  margin: 0.5em;
+  margin-right: 0px;
+  margin-left: 0px;
+  padding: .25em;
+  border-radius: 4px;
+  border: 1.3px solid #5A5B5B;
+}
+.loquar-progress {
+  margin-bottom: 5px;
+}
+.panel-loquar-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+/*mult-choice */
+.mult-choice-col {
+  padding: 5px;
+}
+.mult-choice-option {
+  background-color: #E1E1E1;
+  color: #000000;
+  padding: 3px;
+  width: 100%;
+  text-align: center;
+  margin: 1px;
+  cursor: pointer;
+  font-family: 'Kreon', serif;
+  font-weight: 400;
+  border: 1px solid #000000;
+}
+.selected {
+  background-color: #8F8F8F;
+  color: #FFFFFF;
+}
+/* type blank and select blank */
+.type_blank {
+  background-color: #36FA9F;
+  min-width: 20px;
+  cursor: pointer;
+  padding: 1px;
+
+  min-height: 1.25em;
+  
+}
+.select-content {
+  font-size: 1.25em;
+  font-family: 'Kreon', serif;
+  font-weight: 400;
+  background-color: #FDFFC5;
+  min-height: 4em;
+  margin: 0.5em;
+  padding: 1em;
+  border-radius: 4px;
+  border: 1.3px solid #5A5B5B;
+
+}
+.select-input {
+  font-size: 1.25em;
+  font-family: 'Kreon', serif;
+  font-weight: 400;
+  background-color: #FDFFC5;
+  min-height: 4em;
+  margin: 0.5em;
+  padding: 1em;
+  border-radius: 4px;
+  border: 1.3px dashed #5A5B5B;
+}
+/* NEW SELECT BLANK CLASSES */
+.select-word {
+  background-color: #36FA9F;
+  min-width: 20px;
+  cursor: pointer;
+  min-height: 1.25em;
+}
+.select-word-selected {
+  background-color: #268B5C;
+  color: #FFFFFF;
+  min-width: 20px;
+
+  min-height: 1.25em;
+}
+.select-choice{
+  background-color: #E1E1E1;
+  color: #000000;
+  padding: 3px;
+  width: 100%;
+  font-family: 'Kreon', serif;
+  font-weight: 400;
+  text-align: center;
+  margin: 1px;
+  cursor: pointer;
+  border: 1px solid #000000;
+}
+.select-bank-hide{
+  display: none;
+}
+.select-choice-selected{
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+/* END NEW SELECT BLANK CLASSES */
+/* submission */
+.submit-area {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #212121;
+  background-color: #86BEFF;
+  min-height: 4em;
+  margin: 0.5em;
+  padding: 1em;
+  border-radius: 10px;
+  border: 1px solid #5A5B5B;
+}
+#submit-button {
+  margin-right: 10px;
+  border: 2.2px solid #5A5B5B;
+  font-weight: 600;
+  background-color: #8F8F8F;
+ 
+}
+#next-button {
+  margin-right: 10px;
+  border: 2.2px solid #5A5B5B;
+  color: #5A5B5B;
+  font-weight: 600;
+  background-color: #E4E4E4;
+}
+
+.play-button {
+  border: 1.5px solid #5A5B5B;
+  color: #5A5B5B;
+  background-color: #E4E4E4;
+}
+.play-button:hover, 
+.play-button:focus, 
+.play-button:active, 
+.play-button:active:focus, 
+.play-button.active, 
+.open>.dropdown-toggle.play-button {
+  color: #E4E4E4;
+  background-color: #5A5B5B;
+}
+
+/* answers */

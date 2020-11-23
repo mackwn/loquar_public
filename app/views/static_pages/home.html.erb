@@ -1,0 +1,41 @@
+<div class="full-height-div" id="home-bg">
+
+<div class = "row">
+  <div class = "col-xs-12">
+  <div id="home-splash">
+    <div class = "row">
+    <div class = "col-xs-12 col-md-6 col-md-offset-3">
+    <div id="home-banner" class= "left">Welcome, Salvete</div>
+      <p class = "scaling">Let me speak! Loquar! That is what the millions of words written in so called dead 
+      languages cry out. The wisdom, poetry, and humanity of the ancients lays open before us like 
+      never before. Join us in discovering ourselves through our past. Learn latin today with Loquar!
+      
+      </p>
+      <p id="notice"><%= notice %></p>
+      <hr class = "home-hr">
+      <% if user_signed_in? and current_user.level == 1 %>
+          <%= link_to "Start Grammar Course", lessons_path, :class => "btn btn-default btn-lg  loquar-dark-button", :role => "button" %>
+      <% elsif user_signed_in? and current_user.level > 1 %>
+          <%= link_to "Continue Grammar Course", lessons_path, :class => "btn btn-default btn-lg loquar-dark-button", :role => "button" %>
+      <% else %>
+        <%= link_to "Sign up now!", register_path, :class => "btn btn-default btn-lg loquar-dark-button", :role => "button"%>
+      <% end %>
+      <br>
+      <div class="fb-share-button" data-href="https://www.loquarlatin.com/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Floquar.herokuapp.com%2F&amp;src=sdkpreparse">Share</a></div>
+      <div>
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Checkout Loquar, a language learning webapp for Latin, the language of ancient Rome." data-url="https://www.loquarlatin.com/" data-hashtags="learnlatin" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+      
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+</div>
+<div class = "container-fluid" id = "home-container">
+<%= render 'static_pages/about' %>
+<%= render 'static_pages/faq' %>
+<%= render 'static_pages/contact' %>
+</div>

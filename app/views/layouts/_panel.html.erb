@@ -1,0 +1,6 @@
+<h2>Lessons:</h2>
+<div>
+    <% @lessons.each do |lesson| %>
+    <%= link_to lesson.name, lesson %>
+    <% end %>
+</div>

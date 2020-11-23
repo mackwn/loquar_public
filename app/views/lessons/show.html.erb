@@ -1,0 +1,42 @@
+<div class = "container-fluid" id = "lesson-container">
+  <!-- LESSON HEADER -->  
+
+  <div class = "row">
+    <!-- LEFT COLUMN -->
+    <div id = "left-margin" class = "col-xs-12 col-md-2">
+      
+    </div>
+    <!-- CENTER COLUMN -->
+     <% if session[:lesson_id] != @lesson.id %>
+    <div class = "container col-xs-12 col-md-8" id = "question-container">
+      
+      <!-- if navigating to new lesson - show start lesson button -->
+
+      
+        <%= render 'lessons/start_lesson'%>
+        
+    </div>
+      <!-- render question if this is the current lesson -->  
+      <% else %>
+      <div class = "container col-xs-12 col-md-5" id = "question-container">
+        <%= render @question %>
+      </div>
+      <% end %>
+    
+    
+  
+    <!-- RIGHT COLUMN -->
+    <% if session[:lesson_id] == @lesson.id %>
+    <div id = "right-margin" class = "col-xs-12 col-md-4 container">
+        <div class="panel panel-default hide-scroll panel-loquar" id = "lesson-text">
+        <div class = "panel-body mygrid-wrapper-div">
+          <% if @lesson.content %>
+            <%= raw @lesson.content %>
+          <% end %>
+        </div>
+        </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

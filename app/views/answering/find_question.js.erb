@@ -1,0 +1,6 @@
+$('#next-button').remove()
+<% if session[:question_id] != "start"%>
+$('#question-container').empty()
+<% end %>
+$('#question-container').append("<%= j render @question %>");
+

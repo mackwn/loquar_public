@@ -1,0 +1,40 @@
+<div class = "container loquar-container">
+<p id="notice"><%= notice %></p>
+
+<h1>User Index</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Level</th>
+      <th>Points</th>
+      <th>Role</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.level %></td>
+        <td><%= user.points %></td>
+        <td><%= user.role %></td>
+        <td><%= user.created_at.strftime('%D') %></td>
+        <td><%= user.updated_at.strftime('%D') %></td>
+        <td><%= link_to 'Show', profile_path(user) %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
+

@@ -1,0 +1,18 @@
+<div class = "container loquar-container">
+<div class = "col-xs-1 col-lg-2">.
+    <!-- left column -->
+</div>
+<div class = "col-xs-10 col-lg-8">
+<% if session[:question_state] == "finished" and @course_comp == true %>
+<%= render 'answering/completed_course' %>
+<% elsif session[:question_state] == "finished" %>
+<%= render 'answering/completed_lesson' %>
+<% else %>
+<%= render 'answering/failed_lesson' %>
+<% end %>
+</div>
+
+<div class = "col-xs-1 col-lg-2">
+    <!-- right column -->
+</div>
+</div>

@@ -1,0 +1,163 @@
+<div class = "container-fluid" id = "lesson-container">
+<p id="notice"><%= notice %></p>
+<div class = "row">
+  <!-- left column -->
+  <div class = "col-xs-0 col-lg-1">.
+  </div>
+  <!-- center column -->
+  <div class = "col-xs-12 col-lg-10">
+    <div class="panel panel-default panel-loquar">
+      <div class="panel-heading panel-loquar-heading text-center">
+        Digital D'Ooge Grammar Course
+      </div>
+      
+    <div class="panel-body">
+      <div class ="row">
+        
+        <div class = "col-xs-12">
+          
+          <h4>Welcome to the Digital D'Ooge Latin grammer course...</h4>
+             <p>This course has been prepared from the classic grammar
+             course <i>Latin for Beginners</i> published by the 
+             philologist Benjamin D'Ooge in 1911. 
+             The Loquar version organizes the text according 
+             to the exercises with each lesson spanning one or
+             more of the original chapters.</p> <br>
+            <p>The objective of this course is not to teach you Latin - 
+            no one resource can teach you any language - rather, the 
+            goal is to equip the self-teacher with enough background
+            knowledge to approach exploring this ancient tongue on your 
+            own. See the <%= link_to 'about page',root_path+'#about' %> for 
+            details on additional Latin resources 
+            for the auto-didact.  </p>
+        </div> 
+      </div>
+      <div class = "row">    
+        
+        <div class = "col-sm-12 col-lg-7">
+          <% if user_signed_in? %>
+          <div class = "row">
+          <div class = "col-xs-12">
+          <div class="well well-loquar">
+
+              Level: <%= current_user.level %> |
+              Points: <%= current_user.points.round(1) %> <br>
+              <% if current_user.points >= @les_points %>
+              You are ready to attempt this level's lesson. <br>
+              <%= link_to "Go to lesson #{current_user.level}", lesson_path(current_user.level), :class => "btn btn-default btn-md loquar-light-button", :role => "button" %>
+              <% else %>
+              You require additional points to unlock this level's lesson. 
+              Review previous lessons to earn points. 
+              <%= link_to "Review lesson #{current_user.level-1}", lesson_path(current_user.level-1), :class => "btn btn-default btn-md loquar-light-button", :role => "button" %>
+              <% end %>
+
+          </div>
+          <% if user_signed_in? and current_user.is? :admin %>
+            <%= link_to 'New Lesson', new_lesson_path %>
+          <% end %>
+          </div>
+          </div>
+          <% end %>  
+          
+          <div class = "row" id = "lesson-index-heading">
+          
+          <div class = "col-xs-12">
+             <div class = "col-xs-4 col-sm-6 lesson-index-col"> </div>
+             <div class = "col-xs-4 col-sm-3 lesson-index-col">Points per Question </div>
+             <div class = "col-xs-4 col-sm-3 lesson-index-col">Points to Unlock </div>
+             
+           </div>
+           </div>
+          
+          <% @lessons.each do |lesson| %>
+              <div class = "row lesson-table-block">
+
+              <div class = "col-xs-1 col-md-2 lesson-index-col" id = "lesson-index-id">
+                <%= lesson.id %>
+                
+              </div>
+              <div class = "col-xs-5 col-md-4 lesson-index-col" id = "lesson-index-title">
+                <% if user_signed_in? and lesson.id == 1 %>
+                <%= link_to "#{lesson.name}", lesson, :class => "lesson-link" %>
+                <% elsif user_signed_in? and (current_user.level >= lesson.id and current_user.points >=
+                  points_to_pass(lesson.id-1)) %>
+                <%= link_to "#{lesson.name}", lesson, :class => "lesson-link" %>
+                
+                <% else %>
+                <%= lesson.name %>
+
+                <% end %>
+                <% if user_signed_in? and current_user.is? :admin %>
+                  <br>
+                  <%= link_to 'Edit', edit_lesson_path(lesson) %>
+                  <%= link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+                
+              </div>
+              <div class = "col-xs-3 col-md-3 lesson-index-col" id = "lesson-index-ppq">
+                
+                <% if user_signed_in? %>
+                  <%= points_per_question(lesson.id,current_user.level).round(1) %>
+                <% else %>
+                  <%= points_per_question(lesson.id,1).round(1) %>
+                <% end %>
+               
+              </div>
+              <div class = "col-xs-3 col-md-3 lesson-index-col" id = "lesson-index-points">
+                <% if user_signed_in? and current_user.level > lesson.id %>
+                <span class="glyphicon glyphicon-ok-sign"></span>
+                <% elsif user_signed_in? and current_user.level == lesson.id %>
+                <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                <% else %>
+                <span class="glyphicon glyphicon-lock"></span>
+                <% end %>
+                
+                <%= points_to_pass(lesson.id-1).round %>
+             </div>
+
+              </div>
+          <% end %>
+          </div>
+          <div class = "col-sm-12 col-lg-5">
+            <div class="quote-well">
+            <hr class = "quote-hr">
+            <p><i>The Latin language, meaning the language of Latium, was spoken
+            by the ancient Romans and other inhabitants of Latium, and 
+            Latin was the name applied to it after the armies of Rome had
+            carried the knowledge of her language far beyond its original
+            boundaries ... After conquering the world, Rome impressed her 
+            language, laws, customs of living, and modes of thinking upon
+            the subject nations, and they became Roman; and the world has
+            remained largely Roman ever since. Latin continued to live, 
+            and the knowledge of Latin was the only light of learning that
+            burned steadily through the dark ages that followed the 
+            downfall of the Roman Empire. Latin was the common language
+            of scholars and remained so even down to the days of 
+            Shakespeare. <b> We have seen that our civilization rests
+            upon that of Greece and Rome, and that we must look to the
+            past if we would understand the present </b>. It is obvious,
+            too, that the knowledge of Latin not only leads to a more 
+            exact and effective use of our own language, but that it 
+            is of vital importance and of great practical value to any 
+            one preparing for a literary or professional career.</i><br>
+            <i><h4>-Bejamin D'Ooge</h4> </i></p>
+            <hr class = "quote-hr">
+          </div>
+          <br>
+        </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    </div>
+  </div>
+  </div>
+  <!-- right column -->
+  <div class = "col-xs-0 col-lg-1">
+    
+  </div>
+</div>
+</div>
+

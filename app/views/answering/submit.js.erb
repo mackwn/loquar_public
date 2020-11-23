@@ -1,0 +1,26 @@
+
+<% if @qcorrect %>
+
+$('#lesson-progress').addClass('progress-bar-success');
+$('.submit-area').append('Correct!')
+$('.submit-area').css("background-color","#B3FFB5")
+$('.submit-area').css("color","#005B02")
+$('#points-display').text("<%= session[:score] %>")
+<% else %>
+<% if current_user.level == session[:lesson_id] %>
+$('#lives-display').text("<%= session[:lesson_lives] %>")
+<% end %>
+$('#lesson-progress').addClass('progress-bar-danger');
+    <% if session[:answers_type] != "mult_choice" %>
+        $('#answer-disp-select-blank').css("text-decoration", "line-through")
+        $('#answer-disp').css("text-decoration", "line-through")
+    <% end %>
+        
+    $('.submit-area').css("background-color","#FFBABA")
+    $('.submit-area').css("color","#730A0A")
+    $('.submit-area').append('Incorrect - \"<%= @answer_cont %>\"')
+
+<% end %>
+$('#submit-button').replaceWith('<%= link_to "Next", find_question_path, :remote => true, :class => "btn btn-primary btn-md", :role => "button", :id => "next-button" %>')
+
+

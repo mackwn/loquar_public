@@ -1,0 +1,77 @@
+
+
+<%= form_for(:submission, url: submit_path, remote: true) do |f| %>
+    <%= f.hidden_field :question_id, value: @question.id %>
+    <%= f.hidden_field :answer_id, value: session[:answer_id] %>
+    <%= f.hidden_field :submission, value: "blankfield", :id => 'answer-submit' %>
+<!-- QUESTION DISPLAY ROW -->
+<div class = "row">
+    
+        <!-- LEFT COLUMN -->
+        <div class = "col-xs-12 col-md-6">
+        <div class = "select-content text-center">
+            <%= @question.content %>
+        </div>
+        </div>
+        <!-- RIGHT COLUMN -->
+        <div class = "col-xs-12 col-md-6">
+        <div class = "select-input text-center">
+                <span class = "question-display" id="answer-disp-type-blank">
+                    <%= session[:answers_choices][0].html_safe %>
+                </span>
+                <%= link_to "Lesson Vocab", "#", :class => "btn btn-primary btn-xs play-button", :role => "button", :'data-toggle' => "modal", :'data-target' => "#vocabModal" %>
+                
+        </div>
+        </div>
+</div>  
+
+           
+<!-- SUBMIT BUTTONS -->
+            
+<div class = "row">
+<div class = "col-xs-12" id = "submit-loc">
+    <div class = "submit-area">
+        <%= f.submit "Submit Answer", :class => "btn btn-primary btn-md", :role => "button", :id => "submit-button"  %>
+    </div>
+</div>
+</div>
+
+<% end %>
+
+
+
+<div id="vocabModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Lesson <%= session[:lesson_id] %> Vocab</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class = "row">
+          <div class = "col-xs-6">
+            <% @vocab_list.each do |verbum| %>
+            <%= verbum %><br>
+            <% end %>
+          </div>
+          <div class = "col-xs-6">
+            
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-close">Close</button>
+  
+
+      </div>
+          
+    </div>
+        
+  </div>
+</div>
+

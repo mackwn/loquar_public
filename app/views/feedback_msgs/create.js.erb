@@ -1,0 +1,16 @@
+    <% if @sent %>
+    $('#thanksmsg').text('')
+    $('#errormsgs').text('')
+    $('#thanksmsg').append('Thank you for your valuable feedback.')
+    $('#send-fdbk-btn').addClass('disabled')
+    $('#email-input').attr("disabled", true)
+    $('#body-input').attr("disabled", true)
+    $('#modal-close').click()
+<% else %>
+    $('#thanksmsg').append('There was an error submitting your feedback. Please fill out the form and submit again')
+    <% if @message.errors %>
+        <% @message.errors.full_messages.each do |message| %>
+            $('#errormsgs').append('<%= message %>')
+        <% end %>
+    <% end %>
+<% end %>

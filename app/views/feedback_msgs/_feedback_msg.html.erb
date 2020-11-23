@@ -1,0 +1,22 @@
+<%= form_for feedback_msg, url: create_feedback_msg_url, remote: true do |f| %>
+  <%= notice %>
+  <%= feedback_msg.errors.full_messages.join(', ') %>
+
+  <div class = "field">
+  <%= f.label :email %><br />
+  <%= f.email_field :email, value: current_user.email, :class => "form-control", :id => "email-input", :maxlength => "150" %>
+  </div>
+  <div class = "field">
+  <%= f.label :body %><br />
+  <%= f.text_area :body, placeholder: 'body', :class => "form-control", :id => "body-input", :maxlength => "2000" %>
+  </div>
+  <% if session[:question_id] %>
+  <%= f.hidden_field :question_id, value: session[:question_id] %>
+  <% end %>
+  <% if session[:lesson_id] %>
+  <%= f.hidden_field :lesson_id, value: session[:lesson_id] %>
+  <% end %>
+  <div class = "actions">
+  <%= f.submit 'Send', :class => "btn btn-default btn-md loquar-dark-button", :role => "button", :id => "send-fdbk-btn"  %>
+  </div>
+<% end %>
